@@ -163,13 +163,6 @@ function new_loc_in_collection () {
         let infowindow_options_obj = {
             content: '<h4>' + collection[j][2] + '</h4>',
         };
-    
-        // let infowindow_obj = new google.maps.InfoWindow(infowindow_options_obj);
-        // infowindow_obj.open(new_map_obj, marker);
-    
-        // marker.addListener("click", function(ev) {
-        //     infowindow_obj.open(new_map_obj, marker);
-        // });
 
         let infowindow = new google.maps.InfoWindow(infowindow_options_obj);
         infowindow.open(new_map_obj, marker);
