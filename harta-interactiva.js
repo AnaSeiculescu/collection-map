@@ -183,9 +183,17 @@ function show_collection_map() {
     content.style.display = "flex";
     map_collection.style.display = "block";
 
-    jQuery( "#left" ).animate({
-        width: "40%", 
-        }, 500 );
+    // jQuery( ".left-map" ).animate({
+    //     width: "40%", 
+    //     }, 500 );
+
+    // jQuery( '.right-map' ).animate({
+    //     width: "55%",
+    // }, 500 );
+
+    jQuery("#content").toggleClass("flex-container");
+    jQuery("#left").toggleClass("left-el");
+    jQuery("#right").toggleClass("right-el");
 
 }
 
