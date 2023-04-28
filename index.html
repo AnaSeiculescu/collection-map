@@ -3,48 +3,64 @@
 
     <head>
         <title>Harta Interactiva</title>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvH2xr1HR6PglZ-QYW2aXWJnbSBzSNMxM"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6hSEln3gDCanHPXgwmCkIbnqpCIHOwD8"></script>
         <script src="jquery-3.6.4.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;0,500;0,600;1,200;1,400&display=swap" rel="stylesheet">
         <style>
+            * {
+                margin: 0;
+            }
+
+            body {
+                background-color: #1A2930;
+            }
 
             h1 {
+                margin-top: 1%;
+                border-bottom: 3px solid #F7CE3E;
                 font-family: Kanit, Arial, sans-serif;
                 font-weight: 600;
                 letter-spacing: 1px;
-                color:dimgray;
-                background-color:beige;
+                color:white;
+                font-size: 32px;
+                box-shadow: 2px 2px 3px #F7CE3E;
+                text-align: center;
             }
 
             a {
                 font-family: Kanit, Arial, sans-serif;
                 font-weight: 400;
-                font-size: 21px;
+                font-size: 16px;
                 text-decoration: none;
+                color: white;
             }
 
             #content {
                 display: block;
                 gap: 40px;
-                margin: 2%;
+                margin: 4%;
             }
 
             #left {
                 display: flex;
                 flex-direction: column;
-                gap: 25px;
+                gap: 20px;
                 width: 100%;
                 text-align: center;
-                margin-bottom: 2%;
+                justify-content: space-between;
             }
 
-            /* #search {
-                background-color: beige;
-                height: 45px;
-            } */
+            #left > h1 {
+                margin: 0;
+            }
+
+            #search {
+                margin-top: 10px;
+                display: flex;
+            }
 
             #right {
                 width: 100%;
@@ -52,32 +68,43 @@
 
             #search-map {
                 width: 100%;
-                height: 500px;
+                height: 550px;
+                box-shadow: 10px 10px 1px #a1a3a3;
             }
 
             #search-box {
                 font-family: Kanit, Arial, sans-serif;
                 font-weight: 400;
-                font-size: 18px;
+                font-size: 16px;
+                padding-left: 15px;
+                padding-bottom: 2px;
                 width: 85%;
-                height: 28px;
-                border: 3px solid dimgray;
-                color: purple;
+                height: 25px;
+                border: 3px solid #C5C1C0;
+                color: #0A1612;
+                background-color: #F7CE3E;
             }
 
             #search-button {
                 margin-left: 1%;
-                width: 10%;
+                width: 15%;
+                padding: 3px;
+                border: 2px solid #F7CE3E;
             }
 
             #add-button {
-                background-color: beige;
+                width: 30%;
+                font-size: 16px;
+                align-self: center;
+                border: 2px solid #F7CE3E;
+                padding: 3px;
             }
 
             #collection-map {
                 width: 100%;
-                height: 750px;
+                height: 700px;
                 display: none;
+                box-shadow: 10px 10px 1px #a1a3a3;
             }
 
             @media (max-width: 1300px) {
@@ -101,11 +128,12 @@
 
     <body>
 
+        <h1>Collection map</h1>
+
         <div id="content">
 
             <div id="left">
 
-                <h1>Collection map</h1>
                 <div id="search-map" class="map"></div>
                 <div id="search">
                     <input type="text" id="search-box" placeholder="search for a location, ex: Paris">
