@@ -38,6 +38,22 @@ let new_lat
 let new_lng
 let new_descr
 
+let list_collection = document.getElementById("my-list");
+
+function defineElem(item, id) {
+    const theElem = document.createElement("li");
+    theElem.dataset.id = id;
+    theElem.innerText = item;
+    return theElem;
+}
+
+let lastId = 0;
+
+function getNextId() {
+    lastId ++;
+    return(lastId);
+}
+
 document.getElementById('search-button').onclick = function(event) {
 
     event.preventDefault();
@@ -49,9 +65,14 @@ document.getElementById('search-button').onclick = function(event) {
 let map_collection = document.getElementById('collection-map');
 let collection = [];
 
+const locations_list = [];
+
 document.getElementById("add-button").onclick = function(event) {
 
     event.preventDefault();
+
+    let nextId = getNextId();
+    const elem = defineElem(new_descr, nextId);
 
     console.log(collection.length);
     console.log(new_lat, new_lng);
@@ -66,6 +87,10 @@ document.getElementById("add-button").onclick = function(event) {
         generate_map(map_collection, new_lat, new_lng, new_descr);
         collection.push([new_lat, new_lng, new_descr]);
 
+        list_collection.appendChild(elem);
+
+        
+
     } else if (collection.length == 1) {
 
         let first_lat = collection[0][0];
@@ -75,6 +100,8 @@ document.getElementById("add-button").onclick = function(event) {
             alert("You already collected this location!");
         } else {
             new_loc_in_collection ();
+
+            list_collection.appendChild(elem);
         }
 
     } else {
@@ -96,6 +123,8 @@ document.getElementById("add-button").onclick = function(event) {
 
             if (good_for_collection) {
                 new_loc_in_collection ();
+
+                list_collection.appendChild(elem);
             } else {
                 alert("You already collected this location!");
             }
@@ -103,8 +132,6 @@ document.getElementById("add-button").onclick = function(event) {
         }
 
     }
-
-    console.log(collection.length);
 
 };
 
@@ -179,21 +206,38 @@ function new_loc_in_collection () {
 
 function show_collection_map() {
 
-    let content = document.getElementById("content");
-    content.style.display = "flex";
+    let right = document.getElementById("right");
+    right.style.width = "100%";
     map_collection.style.display = "block";
 
-    // jQuery( ".left-map" ).animate({
-    //     width: "40%", 
-    //     }, 500 );
-
-    // jQuery( '.right-map' ).animate({
-    //     width: "55%",
-    // }, 500 );
-
     jQuery("#content").toggleClass("flex-container");
-    jQuery("#left").toggleClass("left-el");
-    jQuery("#right").toggleClass("right-el");
+    jQuery("#middle").toggleClass("middle-element");
+
+    let left = document.getElementById("left");
+
+    document.getElementById("empty-text").remove();
+
+        if (left.classList.contains("appearance-none")) {
+            left.classList.remove("appearance-none");
+        }
 
 }
+
+document.getElementById("my-collection").onclick = function(ev) {
+
+    ev.preventDefault();
+
+    if (collection.length == 0) {
+        jQuery("#middle").toggleClass("none");
+        jQuery("#left").toggleClass("appearance-none");   
+
+    } else if (collection.length > 0) {
+        jQuery("#left").toggleClass("appearance");
+        jQuery("#middle").toggleClass("middle-element-appearance");
+    }
+
+}
+
+
+
 
