@@ -204,6 +204,9 @@ function new_loc_in_collection () {
 
 }
 
+let left = document.getElementById("left");
+let midd_el = document.getElementsByClassName("midd-el")[0];
+
 function show_collection_map() {
 
     let right = document.getElementById("right");
@@ -213,13 +216,11 @@ function show_collection_map() {
     jQuery("#content").toggleClass("flex-container");
     jQuery("#middle").toggleClass("middle-element");
 
-    let left = document.getElementById("left");
-
     document.getElementById("empty-text").remove();
 
         if (left.classList.contains("appearance-none")) {
             left.classList.remove("appearance-none");
-        }
+        }    
 
 }
 
@@ -234,6 +235,14 @@ document.getElementById("my-collection").onclick = function(ev) {
     } else if (collection.length > 0) {
         jQuery("#left").toggleClass("appearance");
         jQuery("#middle").toggleClass("middle-element-appearance");
+    }
+
+    if (left.classList.contains("appearance")) {
+        left.style.transition = "width 2.5s";
+        midd_el.style.transition = "width 1s";
+    } else {
+        left.style.transition = "width 1s";
+        midd_el.style.transition = "width 2s";
     }
 
 }

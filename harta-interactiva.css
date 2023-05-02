@@ -29,7 +29,6 @@ li {
     width: 0;
     overflow: hidden;
     border-right: 2px solid #F7CE3E;
-    transition: width 2s;
 }
 
 #left > p {
@@ -82,6 +81,7 @@ li {
     display: flex;
     gap: 40px;
     margin: 130px 3%;
+    justify-content: space-between;
 }
 
 #middle {
@@ -151,7 +151,6 @@ li {
     width: 20%;
     height: 700px;
     overflow: scroll;
-    /* transition: width 1s; */
 }
 
 #left.appearance-none {
@@ -165,25 +164,20 @@ li {
     width: 92.5%;
 }
 
-#right.before-it-appears {
-    width: 0;
-}
-
 
 @media (max-width: 1300px) {
 
     .flex-container {
         flex-wrap: wrap;
+        justify-content: space-between;
     }
 
     #middle.midd-el {
-        width: 95%;
-        transition: width 1s;
+        width: 89%;
     }
 
     #middle.middle-element-appearance {
         width: 75%;
-        transition: width 1s;
     }
 
     #header > div {
