@@ -74,8 +74,11 @@ function addSpace() {
 }
 
 function addDeleteBox() {
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "del";
+    const deleteBtn = document.createElement("i");
+    deleteBtn.classList.add("fa-solid");
+    deleteBtn.classList.add("fa-circle-xmark");
+    deleteBtn.classList.add("fa-lg");
+    deleteBtn.style.color = "#f7ce3e";
     return deleteBtn;
 }
 
