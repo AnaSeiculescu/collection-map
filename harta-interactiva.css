@@ -18,11 +18,25 @@ a {
 
 ul {
     width: 100%;
-    padding: 0 30px 0 15px;
+    padding: 0;
+    list-style-type: none;
+    /* text-decoration-color: #F7CE3E; */
 }
 
 li {
-    padding: 10px 20px 10px 10px;
+    padding: 0px 5px;
+    font-family: Kanit, Arial, sans-serif;
+    margin-top: 15px;
+    
+}
+
+li > input {
+    margin-right: 10px;
+}
+
+li > button {
+    background-color: #F7CE3E;
+    font-family: Kanit, Arial, sans-serif;
 }
 
 #left {
@@ -33,6 +47,7 @@ li {
 
 #left > p {
     color: white;
+    font-family: Kanit, Arial, sans-serif;
 }
 
 #header {

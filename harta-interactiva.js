@@ -47,6 +47,72 @@ function defineElem(item, id) {
     return theElem;
 }
 
+function defineCheckBox(tickedOff, id){
+    const checkBox = document.createElement("input");
+    checkBox.type = "checkbox";
+    checkBox.checked = tickedOff;
+    checkBox.dataset.id = id;
+    checkBox.addEventListener("click", handleCheckboxClick);
+    return checkBox;
+}
+
+function handleCheckboxClick(event) {
+    const checkboxInput = event.target;
+    const isChecked = checkboxInput.checked;
+    const id = checkboxInput.dataset.id;
+
+    const li = document.querySelector(`li[data-id="${id}"]`);
+    li.dataset.checked = isChecked;
+
+    addDecorText(isChecked, id);
+}
+
+function addSpace() {
+    const space = document.createElement("span");
+    space.textContent = " ";
+    return space;
+}
+
+function addDeleteBox() {
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "del";
+    return deleteBtn;
+}
+
+function insertElementsTogether(element, box, space, deleteBtn) {
+    element.insertAdjacentElement('afterbegin', box);
+    element.insertAdjacentElement('beforeend', space);
+    element.insertAdjacentElement('beforeend', space);
+    element.insertAdjacentElement('beforeend', deleteBtn);
+    list_collection.appendChild(element);
+}
+
+function addDeleteItem(deleteBtn, id) {
+    deleteBtn.addEventListener("click", function() {
+        const liToDelete = document.querySelector(`li[data-id="${id}"]`);
+        console.log(liToDelete);
+        liToDelete.remove();
+    })
+}
+
+function addDecorText(isChecked, id) {
+    const li = document.querySelector(`li[data-id="${id}"]`);
+    if (isChecked) {
+        li.style.textDecoration = "line-through 2px red";
+    } else {
+        li.style.textDecoration = "none";
+    }
+}
+
+function addCollectionItem(item, tickedOff, id) {
+    const element = defineElem(item, id);
+    const box = defineCheckBox(tickedOff, id);
+    const deleteBtn = addDeleteBox();
+    const space = addSpace();
+    insertElementsTogether(element, box, space, deleteBtn);
+    addDeleteItem(deleteBtn, id);
+}
+
 let lastId = 0;
 
 function getNextId() {
@@ -69,10 +135,10 @@ const locations_list = [];
 
 document.getElementById("add-button").onclick = function(event) {
 
+    console.log(event);
     event.preventDefault();
 
     let nextId = getNextId();
-    const elem = defineElem(new_descr, nextId);
 
     console.log(collection.length);
     console.log(new_lat, new_lng);
@@ -86,10 +152,7 @@ document.getElementById("add-button").onclick = function(event) {
         show_collection_map();
         generate_map(map_collection, new_lat, new_lng, new_descr);
         collection.push([new_lat, new_lng, new_descr]);
-
-        list_collection.appendChild(elem);
-
-        
+        addCollectionItem(new_descr, false, nextId);
 
     } else if (collection.length == 1) {
 
@@ -100,8 +163,7 @@ document.getElementById("add-button").onclick = function(event) {
             alert("You already collected this location!");
         } else {
             new_loc_in_collection ();
-
-            list_collection.appendChild(elem);
+            addCollectionItem(new_descr, false, nextId);
         }
 
     } else {
@@ -123,8 +185,7 @@ document.getElementById("add-button").onclick = function(event) {
 
             if (good_for_collection) {
                 new_loc_in_collection ();
-
-                list_collection.appendChild(elem);
+                addCollectionItem(new_descr, false, nextId);
             } else {
                 alert("You already collected this location!");
             }
@@ -246,6 +307,7 @@ document.getElementById("my-collection").onclick = function(ev) {
     }
 
 }
+
 
 
 
