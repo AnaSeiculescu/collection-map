@@ -179,6 +179,21 @@ li > button {
     width: 92.5%;
 }
 
+@media (min-width: 1400px) {
+
+    #middle.midd-el {
+        width: 95%;
+    }
+
+    #middle.middle-element {
+        width: 55%;
+    }
+
+    /* #middle.middle-element-appearance {
+        width: 75%;
+    } */
+
+}
 
 @media (max-width: 1400px) {
 
@@ -201,18 +216,10 @@ li > button {
 
 }
 
-@media (min-width: 1400px) {
-
-    #middle.midd-el {
-        width: 95%;
-    }
-
-    #middle.middle-element {
-        width: 55%;
-    }
+@media (max-width: 851px) {
 
     #middle.middle-element-appearance {
-        /* width: 75%; */
+        width: 72%;
     }
-
+    
 }

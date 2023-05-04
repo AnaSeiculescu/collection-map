@@ -92,16 +92,12 @@ function insertElementsTogether(element, box, space, deleteBtn) {
 
 function addDeleteItem(deleteBtn, id) {
     deleteBtn.addEventListener("click", function() {
-
         const liToDelete = document.querySelector(`li[data-id="${id}"]`);
-
         for (let i = 0; i < collection.length; i++) {
-
             if (collection[i][2].trim() === liToDelete.innerText.trim()) {
                 collection.splice(i, 1);
                 break;
             }
-            
         }
 
         liToDelete.remove();
@@ -115,16 +111,13 @@ function addDeleteItem(deleteBtn, id) {
 
             document.getElementById("content").classList.remove("flex-container");
             document.getElementById("middle").classList.remove("middle-element");
-            // document.getElementById("my-collection").click();
+
+            document.getElementById("my-collection").click();
 
             document.getElementById("left").classList.remove("appearance");
             document.getElementById("middle").classList.remove("middle-element-appearance");
-
-            // let content = document.getElementById("content");
         }
-
-        remove_loc_from_collection();
-        
+        remove_loc_from_collection(); 
     })
 }
 
@@ -154,23 +147,14 @@ function getNextId() {
 }
 
 document.getElementById('search-button').onclick = function(event) {
-
     event.preventDefault();
-
     search_new_location();
-
 };
 
 let map_collection = document.getElementById('collection-map');
 let collection = [];
 
-// const locations_list = [];
-
-
-
 document.getElementById("add-button").onclick = function(event) {
-
-    // console.log(event);
     event.preventDefault();
 
     let nextId = getNextId();
@@ -179,11 +163,8 @@ document.getElementById("add-button").onclick = function(event) {
     console.log(new_lat, new_lng);
 
     if (!new_lat || !new_lng) {
-
         alert("You must search for a location first!");
-
     } else if (collection.length == 0) {
-
         show_collection_map();
         generate_map(map_collection, new_lat, new_lng, new_descr);
         collection.push([new_lat, new_lng, new_descr]);
@@ -192,32 +173,23 @@ document.getElementById("add-button").onclick = function(event) {
         document.getElementById("empty-text").style.display = "none";
 
     } else if (collection.length == 1) {
-
         let first_lat = collection[0][0];
         let first_lng = collection[0][1];
-
         if (new_lat == first_lat && new_lng == first_lng) {
             alert("You already collected this location!");
         } else {
             new_loc_in_collection ();
             addCollectionItem(new_descr, false, nextId);
         }
-
     } else {
-
         if ( collection.length > 1 ) {
-    
             let good_for_collection = true;
-
             for (let k = 0; k < collection.length; k++) {
-
                 let old_lat = collection[k][0];
                 let old_lng = collection[k][1];
-
                 if (new_lat == old_lat && new_lng == old_lng) {
                     good_for_collection = false;
                 } 
-
             }
 
             if (good_for_collection) {
@@ -226,23 +198,14 @@ document.getElementById("add-button").onclick = function(event) {
             } else {
                 alert("You already collected this location!");
             }
-    
         }
-
     }
-
-    // console.log(collection);
-
 };
 
 function search_new_location() {
-
     let search_str = document.getElementById('search-box').value;
-
     let geocoder_obj = new google.maps.Geocoder();
-
     geocoder_obj.geocode({address: search_str}, function(results, status) {
-
         if (!results || status == "ZERO_RESULTS") {
             alert("Location not found!");
         } else {
@@ -254,21 +217,16 @@ function search_new_location() {
 
             generate_map(search_map, new_lat, new_lng, new_descr);
         }
-
     });
-
 }
 
 function new_loc_in_collection () {
 
     collection.push([new_lat, new_lng, new_descr]);
-
     let bound_in_polygon = new google.maps.LatLngBounds();
-
     for (let i = 0; i < collection.length; i++) {
         bound_in_polygon.extend(new google.maps.LatLng(collection[i][0], collection[i][1]));
     }
-
     let new_map_options_obj = {
         // zoom: 10,
         center: bound_in_polygon.getCenter(),
@@ -279,7 +237,6 @@ function new_loc_in_collection () {
     let marker
 
     for (let j = 0; j < collection.length; j++) {
-
         marker = new google.maps.Marker({
             position: new google.maps.LatLng(collection[j][0], collection[j][1]),
             map: new_map_obj,
@@ -297,7 +254,6 @@ function new_loc_in_collection () {
             infowindow.setContent(this.content);
             infowindow.open(this.getMap(), this);
         });
-
     }
 
     new_map_obj.fitBounds(bound_in_polygon, 90);
@@ -322,7 +278,6 @@ function remove_loc_from_collection() {
     let marker
 
     for (let j = 0; j < collection.length; j++) {
-
         marker = new google.maps.Marker({
             position: new google.maps.LatLng(collection[j][0], collection[j][1]),
             map: new_map_obj,
@@ -340,7 +295,6 @@ function remove_loc_from_collection() {
             infowindow.setContent(this.content);
             infowindow.open(this.getMap(), this);
         });
-
     }
 
     new_map_obj.fitBounds(bound_in_polygon, 90);
@@ -358,23 +312,18 @@ function show_collection_map() {
 
     // jQuery("#content").toggleClass("flex-container");  
             // asta de deasupra aici, ramane in locul celui de dedesupt dupa ce collection-map va disparea la stergerea ultimului item din lista
-
     document.getElementById("content").classList.add("flex-container");
-
     // jQuery("#middle").toggleClass("middle-element");
 
     document.getElementById("middle").classList.add("middle-element");
-
     // document.getElementById("empty-text").style.display = "none";
 
         if (left.classList.contains("appearance-none")) {
             left.classList.remove("appearance-none");
         }    
-
 }
 
 document.getElementById("my-collection").onclick = function(ev) {
-
     ev.preventDefault();
 
     if (collection.length == 0) {
