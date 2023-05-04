@@ -26,7 +26,7 @@ li {
     padding: 0px 5px;
     font-family: Kanit, Arial, sans-serif;
     margin-top: 15px;
-    
+    /* display: inline; */
 }
 
 li > input {
@@ -42,6 +42,7 @@ li > button {
     width: 0;
     overflow: hidden;
     border-right: 2px solid #F7CE3E;
+    /* transition: width 2s; */
 }
 
 #left > p {  /* element with id="empty-text"  */
@@ -105,6 +106,7 @@ li > button {
     gap: 20px;
     width: 100%;
     text-align: center;
+    /* transition: width 2s; */
 }
 
 #middle > h1 {
@@ -163,23 +165,23 @@ li > button {
 
 #left.appearance {
     color: white;
-    width: 20%;
+    width: 18%;
     height: 700px;
     overflow: scroll;
 }
 
-#left.appearance-none {
+/* #left.appearance-none {
     width: 6%;
     height: 700px;
     border-right: 2px solid #F7CE3E;
-}
+} */
 
 #middle.none {
     display: flex;
     width: 92.5%;
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1500px) {
 
     #middle.midd-el {
         width: 95%;
@@ -189,13 +191,19 @@ li > button {
         width: 55%;
     }
 
+    #left.appearance-none {
+        width: 6%;
+        height: 700px;
+        border-right: 2px solid #F7CE3E;
+    }
+
     /* #middle.middle-element-appearance {
         width: 75%;
     } */
 
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1500px) {
 
     .flex-container {
         flex-wrap: wrap;
@@ -203,7 +211,7 @@ li > button {
     }
 
     #middle.midd-el {
-        width: 89%;
+        width: 85%;
     }
 
     #middle.middle-element-appearance {
@@ -211,7 +219,13 @@ li > button {
     }
 
     #header > div {
-        width: 20%;
+        width: 18%;
+    }
+
+    #left.appearance-none {
+        width: 10%;
+        height: 700px;
+        border-right: 2px solid #F7CE3E;
     }
 
 }
@@ -219,7 +233,19 @@ li > button {
 @media (max-width: 851px) {
 
     #middle.middle-element-appearance {
-        width: 72%;
+        width: 75%;
     }
+
+    /* #middle.midd-el.priority {
+        width: 65%;
+    } */
+/* 
+    ul {
+        display: flex;
+    }
+
+    ul > li {
+        display: inline-flex;
+    } */
     
 }

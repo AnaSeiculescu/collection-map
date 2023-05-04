@@ -164,6 +164,7 @@ document.getElementById("add-button").onclick = function(event) {
 
     if (!new_lat || !new_lng) {
         alert("You must search for a location first!");
+
     } else if (collection.length == 0) {
         show_collection_map();
         generate_map(map_collection, new_lat, new_lng, new_descr);
@@ -200,6 +201,8 @@ document.getElementById("add-button").onclick = function(event) {
             }
         }
     }
+
+    // midd_el.classList.remove("priority");
 };
 
 function search_new_location() {
@@ -303,11 +306,27 @@ function remove_loc_from_collection() {
 
 let left = document.getElementById("left");
 let midd_el = document.getElementsByClassName("midd-el")[0];
+// let middle = document.getElementById("middle");
 
 function show_collection_map() {
+    left.classList.remove("appearance-none");
+    // midd_el.classList.add("priority");
+
+    if (left.classList.contains("appearance-none")) {
+        
+        // document.getElementById("middle").classList.add("priority");
+        // jQuery("#left.appearance-none").css({'transition': 'width 2s'});
+        // jQuery("#middle.midd-el none priority").css({'transition': 'width 3s'});
+
+        // left.style.transition = "width 1s";
+        // midd_el.style.transition = "width 4s";
+
+    }
 
     let right = document.getElementById("right");
     right.style.width = "100%";
+    right.style.transition = "width 1s";
+    document.getElementById("middle").style.transition = "width 2s";
     map_collection.style.display = "block";
 
     // jQuery("#content").toggleClass("flex-container");  
@@ -316,15 +335,18 @@ function show_collection_map() {
     // jQuery("#middle").toggleClass("middle-element");
 
     document.getElementById("middle").classList.add("middle-element");
+    document.getElementById("middle").classList.add("priority");
     // document.getElementById("empty-text").style.display = "none";
 
-        if (left.classList.contains("appearance-none")) {
-            left.classList.remove("appearance-none");
-        }    
+            
 }
 
 document.getElementById("my-collection").onclick = function(ev) {
     ev.preventDefault();
+
+    if (midd_el.classList.contains("priority")) {
+        midd_el.classList.remove("priority");
+    }
 
     if (collection.length == 0) {
         jQuery("#middle").toggleClass("none");
