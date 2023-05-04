@@ -92,9 +92,22 @@ function insertElementsTogether(element, box, space, deleteBtn) {
 
 function addDeleteItem(deleteBtn, id) {
     deleteBtn.addEventListener("click", function() {
+
         const liToDelete = document.querySelector(`li[data-id="${id}"]`);
-        console.log(liToDelete);
+
+        for (let i = 0; i < collection.length; i++) {
+
+            if (collection[i][2].trim() === liToDelete.innerText.trim()) {
+                collection.splice(i, 1);
+                break;
+            }
+            
+        }
+
         liToDelete.remove();
+
+        console.log(collection);
+        
     })
 }
 
@@ -136,9 +149,11 @@ let collection = [];
 
 const locations_list = [];
 
+
+
 document.getElementById("add-button").onclick = function(event) {
 
-    console.log(event);
+    // console.log(event);
     event.preventDefault();
 
     let nextId = getNextId();
@@ -196,6 +211,8 @@ document.getElementById("add-button").onclick = function(event) {
         }
 
     }
+
+    // console.log(collection);
 
 };
 
@@ -280,7 +297,7 @@ function show_collection_map() {
     jQuery("#content").toggleClass("flex-container");
     jQuery("#middle").toggleClass("middle-element");
 
-    document.getElementById("empty-text").remove();
+    document.getElementById("empty-text").style.display = "none";
 
         if (left.classList.contains("appearance-none")) {
             left.classList.remove("appearance-none");

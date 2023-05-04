@@ -20,7 +20,6 @@ ul {
     width: 100%;
     padding: 0;
     list-style-type: none;
-    /* text-decoration-color: #F7CE3E; */
 }
 
 li {
@@ -45,7 +44,7 @@ li > button {
     border-right: 2px solid #F7CE3E;
 }
 
-#left > p {
+#left > p {  /* element with id="empty-text"  */
     color: white;
     font-family: Kanit, Arial, sans-serif;
 }
