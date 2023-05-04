@@ -223,7 +223,7 @@ li > button {
     }
 
     #left.appearance-none {
-        width: 10%;
+        width: 11%;
         height: 700px;
         border-right: 2px solid #F7CE3E;
     }
@@ -233,10 +233,10 @@ li > button {
 @media (max-width: 851px) {
 
     #middle.middle-element-appearance {
-        width: 75%;
+        width: 70%;
     }
-
-    /* #middle.midd-el.priority {
+/* 
+    #middle.midd-el.priority {
         width: 65%;
     } */
 /* 

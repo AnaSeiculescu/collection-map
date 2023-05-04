@@ -335,7 +335,7 @@ function show_collection_map() {
     // jQuery("#middle").toggleClass("middle-element");
 
     document.getElementById("middle").classList.add("middle-element");
-    document.getElementById("middle").classList.add("priority");
+    // document.getElementById("middle").classList.add("priority");
     // document.getElementById("empty-text").style.display = "none";
 
             
@@ -344,9 +344,9 @@ function show_collection_map() {
 document.getElementById("my-collection").onclick = function(ev) {
     ev.preventDefault();
 
-    if (midd_el.classList.contains("priority")) {
-        midd_el.classList.remove("priority");
-    }
+    // if (midd_el.classList.contains("priority")) {
+    //     midd_el.classList.remove("priority");
+    // }
 
     if (collection.length == 0) {
         jQuery("#middle").toggleClass("none");
@@ -360,6 +360,7 @@ document.getElementById("my-collection").onclick = function(ev) {
     if (left.classList.contains("appearance")) {
         left.style.transition = "width 2s";
         midd_el.style.transition = "width 1s";
+        // midd_el.classList.remove("priority");
     } else {
         left.style.transition = "width 1s";
         midd_el.style.transition = "width 2s";
