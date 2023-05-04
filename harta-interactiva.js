@@ -4,7 +4,7 @@ let search_map = document.getElementById('search-map');
 function generate_map(map_el = search_map, lat_val = 51.508742, lng_val = -0.120850, descr_val = 'London') {
     
     let map_options_obj = {
-        zoom: 13,
+        zoom: 12,
         center: {lat: lat_val, lng: lng_val},
     }
 
@@ -106,7 +106,24 @@ function addDeleteItem(deleteBtn, id) {
 
         liToDelete.remove();
 
-        console.log(collection);
+        if (collection.length == 0) {
+            document.getElementById("empty-text").style.display = "block";
+
+            let right = document.getElementById("right");
+            right.style.width = "0";
+            map_collection.style.display = "none";
+
+            document.getElementById("content").classList.remove("flex-container");
+            document.getElementById("middle").classList.remove("middle-element");
+            // document.getElementById("my-collection").click();
+
+            document.getElementById("left").classList.remove("appearance");
+            document.getElementById("middle").classList.remove("middle-element-appearance");
+
+            // let content = document.getElementById("content");
+        }
+
+        remove_loc_from_collection();
         
     })
 }
@@ -147,7 +164,7 @@ document.getElementById('search-button').onclick = function(event) {
 let map_collection = document.getElementById('collection-map');
 let collection = [];
 
-const locations_list = [];
+// const locations_list = [];
 
 
 
@@ -171,6 +188,8 @@ document.getElementById("add-button").onclick = function(event) {
         generate_map(map_collection, new_lat, new_lng, new_descr);
         collection.push([new_lat, new_lng, new_descr]);
         addCollectionItem(new_descr, false, nextId);
+
+        document.getElementById("empty-text").style.display = "none";
 
     } else if (collection.length == 1) {
 
@@ -251,7 +270,50 @@ function new_loc_in_collection () {
     }
 
     let new_map_options_obj = {
-        zoom: 10,
+        // zoom: 10,
+        center: bound_in_polygon.getCenter(),
+    };
+
+    let new_map_obj = new google.maps.Map(map_collection, new_map_options_obj);
+
+    let marker
+
+    for (let j = 0; j < collection.length; j++) {
+
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(collection[j][0], collection[j][1]),
+            map: new_map_obj,
+            title: collection[j][2],
+            content: '<h4>' + collection[j][2] + '</h4>',
+        });
+
+        let infowindow_options_obj = {
+            content: '<h4>' + collection[j][2] + '</h4>',
+        };
+
+        let infowindow = new google.maps.InfoWindow(infowindow_options_obj);
+        infowindow.open(new_map_obj, marker);
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(this.content);
+            infowindow.open(this.getMap(), this);
+        });
+
+    }
+
+    new_map_obj.fitBounds(bound_in_polygon, 90);
+
+}
+
+function remove_loc_from_collection() {
+
+    let bound_in_polygon = new google.maps.LatLngBounds();
+
+    for (let i = 0; i < collection.length; i++) {
+        bound_in_polygon.extend(new google.maps.LatLng(collection[i][0], collection[i][1]));
+    }
+
+    let new_map_options_obj = {
+        // zoom: 10,
         center: bound_in_polygon.getCenter(),
     };
 
@@ -294,10 +356,16 @@ function show_collection_map() {
     right.style.width = "100%";
     map_collection.style.display = "block";
 
-    jQuery("#content").toggleClass("flex-container");
-    jQuery("#middle").toggleClass("middle-element");
+    // jQuery("#content").toggleClass("flex-container");  
+            // asta de deasupra aici, ramane in locul celui de dedesupt dupa ce collection-map va disparea la stergerea ultimului item din lista
 
-    document.getElementById("empty-text").style.display = "none";
+    document.getElementById("content").classList.add("flex-container");
+
+    // jQuery("#middle").toggleClass("middle-element");
+
+    document.getElementById("middle").classList.add("middle-element");
+
+    // document.getElementById("empty-text").style.display = "none";
 
         if (left.classList.contains("appearance-none")) {
             left.classList.remove("appearance-none");
@@ -319,7 +387,7 @@ document.getElementById("my-collection").onclick = function(ev) {
     }
 
     if (left.classList.contains("appearance")) {
-        left.style.transition = "width 2.5s";
+        left.style.transition = "width 2s";
         midd_el.style.transition = "width 1s";
     } else {
         left.style.transition = "width 1s";

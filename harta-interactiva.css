@@ -45,6 +45,7 @@ li > button {
 }
 
 #left > p {  /* element with id="empty-text"  */
+    display: block;
     color: white;
     font-family: Kanit, Arial, sans-serif;
 }
@@ -179,7 +180,7 @@ li > button {
 }
 
 
-@media (max-width: 1300px) {
+@media (max-width: 1400px) {
 
     .flex-container {
         flex-wrap: wrap;
@@ -200,7 +201,7 @@ li > button {
 
 }
 
-@media (min-width: 1300px) {
+@media (min-width: 1400px) {
 
     #middle.midd-el {
         width: 95%;
@@ -208,11 +209,10 @@ li > button {
 
     #middle.middle-element {
         width: 55%;
-        transition: width 1s;
     }
 
     #middle.middle-element-appearance {
-        width: 75%;
+        /* width: 75%; */
     }
 
 }
